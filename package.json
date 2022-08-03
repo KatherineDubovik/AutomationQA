@@ -4,6 +4,7 @@
   "description": "AQA courses (TMS)",
   "main": "index.js",
   "scripts": {
+    "hw16": "npx ts-node ./hw16/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
