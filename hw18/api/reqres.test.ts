@@ -8,11 +8,13 @@ const credentials: { email: string; password: string; token: string } = {
     password: "cityslicka",
     token: "QpwL5tke4Pnpja7X4"
 };
+const { email, password, token } = credentials;
 
 const expectedUser: { name: string, job: string } = {
     name: "Katherine",
     job: "QA engineer"
 };
+const { name, job } = expectedUser;
 
 describe("Test HTTP methods", () => {
     describe("Test GET-method to get users list", () => {
@@ -66,13 +68,13 @@ describe("Test HTTP methods", () => {
                 response = await superagent
                 .post(`${baseUrl}/login`)
                 .set("Content-Type", "application/json")
-                .send({ email: credentials.email, password: credentials.password });
+                .send({ email, password });
             } catch (err: any) {
                 throw new Error (err.message);
             }
 
             expect(response.statusCode).toBe(200);
-            expect(response.body.token).toStrictEqual(credentials.token);
+            expect(response.body.token).toStrictEqual(token);
         });
 
         test("Should correctly handle authorization without password", async () => {
@@ -80,7 +82,7 @@ describe("Test HTTP methods", () => {
                 response = await superagent
                 .post(`${baseUrl}/login`)
                 .set("Content-Type", "application/json")
-                .send({ email: credentials.email});
+                .send({ email });
             } catch (err: any) {
                 expect(err.status).toBe(400);
                 expect(JSON.parse(err.response.text)).toStrictEqual({ error: "Missing password" });
@@ -92,7 +94,7 @@ describe("Test HTTP methods", () => {
                 response = await superagent
                 .post(`${baseUrl}/login`)
                 .set("Content-Type", "application/json")
-                .send({ password: credentials.password });
+                .send({ password });
             } catch (err: any) {
                 expect(err.status).toBe(400);
                 expect(JSON.parse(err.response.text)).toStrictEqual({ error: "Missing email or username" });
@@ -104,7 +106,7 @@ describe("Test HTTP methods", () => {
                 response = await superagent
                 .post(`${baseUrl}/login`)
                 .set("Content-Type", "application/json")
-                .send({ email: `123${credentials.email}`, password: credentials.password });
+                .send({ email: `123${credentials.email}`, password });
             } catch (err: any) {
                 expect(err.status).toBe(400);
                 expect(JSON.parse(err.response.text)).toStrictEqual({ error: "user not found" });
@@ -118,14 +120,14 @@ describe("Test HTTP methods", () => {
                 response = await superagent
                 .put(`${baseUrl}/users/2`)
                 .set("Content-Type", "application/json")
-                .send({ name: expectedUser.name, job: expectedUser.job });
+                .send({ name, job });
             } catch (err: any) {
                 throw new Error (err.message);
             }
             
             expect(response.statusCode).toBe(200);
-            expect(response.body.name).toStrictEqual(expectedUser.name);
-            expect(response.body.job).toStrictEqual(expectedUser.job);
+            expect(response.body.name).toStrictEqual(name);
+            expect(response.body.job).toStrictEqual(job);
         });
     });
 
@@ -135,13 +137,13 @@ describe("Test HTTP methods", () => {
                 response = await superagent
                 .patch(`${baseUrl}/users/2`)
                 .set("Content-Type", "application/json")
-                .send({ name: expectedUser.name });
+                .send({ name });
             } catch (err: any) {
                 throw new Error (err.message);
             }
             
             expect(response.statusCode).toBe(200);
-            expect(response.body.name).toStrictEqual(expectedUser.name);
+            expect(response.body.name).toStrictEqual(name);
         });
     });
 
