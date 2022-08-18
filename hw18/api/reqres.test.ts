@@ -106,7 +106,7 @@ describe("Test HTTP methods", () => {
                 response = await superagent
                 .post(`${baseUrl}/login`)
                 .set("Content-Type", "application/json")
-                .send({ email: `123${credentials.email}`, password });
+                .send({ email: `123${email}`, password });
             } catch (err: any) {
                 expect(err.status).toBe(400);
                 expect(JSON.parse(err.response.text)).toStrictEqual({ error: "user not found" });
