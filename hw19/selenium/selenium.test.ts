@@ -11,7 +11,7 @@ const defaultItemQuantity = 1;
 let itemsQuantity: string;
 
 
-describe("Tests for OZ.by site", () => {
+describe("Tests for 21vek.by site", () => {
     test("Should display page title correctly", async () => {
         await driver.manage().window().maximize();
         await driver.get(baseUrl);
@@ -19,7 +19,7 @@ describe("Tests for OZ.by site", () => {
         expect(tabTitle).toBe("Онлайн-гипермаркет 21vek.by");
     });
 
-    test("Should follow some category page", async () => {
+    test("Should follow the page for a definite category", async () => {
         const followingPageAddress = "mobile/";
         await driver.findElement(By.linkText("Смартфоны")).click();
         const currentUrl = await driver.getCurrentUrl();
@@ -31,8 +31,9 @@ describe("Tests for OZ.by site", () => {
     test("Should add item to the cart", async () => {
         await driver.wait(until.titleIs("Смартфон купить в Минске, Беларуси в рассрочку в интернет магазине"), defaultWaitingTime);
         await driver.findElement(By.xpath(`//form[@data-code="6748009_0"]/button`)).click();
-        await driver.wait(until.elementLocated(By.css(`a[data-code="6748009_0"]`)), defaultWaitingTime);  // не знала, может здесь просто добавить driver.sleep?
-        const changedButtonTitle = await driver.findElement(By.css(`a[data-code="6748009_0"]`)).getText();
+        const toCartButtonLocator = By.css(`a[data-code="6748009_0"]`);
+        await driver.wait(until.elementLocated(toCartButtonLocator), defaultWaitingTime);
+        const changedButtonTitle = await driver.findElement(toCartButtonLocator).getText();
         const cartItemsCount = await driver.findElement(By.className("headerCartCount")).getText();
         expect(changedButtonTitle).toStrictEqual("В корзине");
         expect(cartItemsCount).toStrictEqual("1");
