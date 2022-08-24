@@ -66,7 +66,7 @@ describe("Tests for 21vek.by site", () => {
         expect(basketContainer).toBe("display: none;");
     }); 
 
-    afterAll(() => {
-        driver.quit();
+    afterAll(async () => {
+       await driver.quit();
     });
 });
