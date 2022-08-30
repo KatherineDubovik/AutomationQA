@@ -15,13 +15,13 @@ describe("Tests for 21vek.by site", () => {
     it("Should display page title correctly", async () => {
         await homePage.visitPage();
         await homePage.maximizeWindow();
-        await homePage.waitForPageTitle("Онлайн-гипермаркет 21vek.by");
+        await homePage.waitForPageTitleToBe("Онлайн-гипермаркет 21vek.by");
     });
 
     it("Should follow the page for a definite category", async () => {
         await homePage.clickOnPromoCategory(PROMO_CATEGORIES.BIKES);
-        await bikesPage.waitForPageTitle("Купить велосипед в Минске с доставкой, велики в рассрочку - 21vek.by");
-        expect(await bikesPage.getCategoryHeader()).to.be.equal(PROMO_CATEGORIES.BIKES);
+        await bikesPage.waitForPageTitleToBe("Купить велосипед в Минске с доставкой, велики в рассрочку - 21vek.by");
+        expect(await bikesPage.getCategoryHeaderText()).to.be.equal(PROMO_CATEGORIES.BIKES);
     });
 
     it("Should sort items by popularity by default", async () => {

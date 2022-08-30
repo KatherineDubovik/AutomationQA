@@ -20,7 +20,7 @@ export class BasePage {
         return await this.driver.getTitle();
     }
 
-    async waitForPageTitle(title: string) {
+    async waitForPageTitleToBe(title: string) {
         await this.driver.wait(until.titleContains(title), defaultWaitingTime);
     }
 

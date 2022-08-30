@@ -10,7 +10,7 @@ export class BikesPage extends HomePage {
         this.url = `${baseUrl}bikes`
     }
 
-    async getCategoryHeader() {  
+    async getCategoryHeaderText() {  
         return await (await this.driverUtils.findElement(SELECTOR_TYPES.XPATH, `//h1[contains(@class,"content__header")]`)).getText();
     }
 
