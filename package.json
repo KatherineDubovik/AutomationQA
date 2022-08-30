@@ -8,7 +8,8 @@
     "hw17-test-mocha": "mocha --config hw17/mocharc.json",
     "hw17-test-jest": "jest --config hw17/jest.config.js",
     "hw18-api-tests": "jest --config hw18/api/jest.config.js",
-    "hw19-selenium": "jest --config hw19/jest.config.js"
+    "hw19-selenium": "jest --config hw19/jest.config.js",
+    "hw21-pageObjects": "mocha --config hw21/mocharc.json"
   },
   "repository": {
     "type": "git",
