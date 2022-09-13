@@ -25,14 +25,24 @@ class MobilePage extends HomePage {
         await (await $('//div[@id="j-paginator"]')).scrollIntoView();
     }
 
-    async clickOnPaginationPageNumber(pageNumber: number) {
-        await (await $(`//div[@id="j-paginator"]/a[@name="${pageNumber}"]`)).click();
-        await (await $(`//div[@id="j-paginator"]/span[@name="${pageNumber}"]`)).waitForDisplayed();
+    async clickOnPaginationPageNumber(expectedPageNumber: number) {
+        let pageNumberIsDisplayed = await this.checkIfPageNumberIsVisible(expectedPageNumber);
+        if (!pageNumberIsDisplayed) {
+            while (!pageNumberIsDisplayed) {
+                await this.clickOnPaginatorArrow(PAGINATOR_ARROW_TYPE.RIGHT);
+                pageNumberIsDisplayed = await this.checkIfPageNumberIsVisible(expectedPageNumber);
+            }
+        }
+        await (await $(`//div[@id="j-paginator"]/a[@name="${expectedPageNumber}"]`)).click();
+        await (await $(`//div[@id="j-paginator"]/span[@name="${expectedPageNumber}"]`)).waitForDisplayed(); 
+    }
+
+    async checkIfPageNumberIsVisible(pageNumber: number) {
+        return await (await $(`//div[@id="j-paginator"]/a[@name="${pageNumber}"]`)).isDisplayed()
     }
 
     async getActivePaginationPageNumber() {
-        const activePaginationPageNumber = Number(await (await $('//div[@id="j-paginator"]/span[@class="cr-curent cr-paging_link"]')).getText());
-        return activePaginationPageNumber;
+        return Number(await (await $('//div[@id="j-paginator"]/span[@class="cr-curent cr-paging_link"]')).getText());
     }
 
     async clickOnPaginatorArrow(arrowType: PAGINATOR_ARROW_TYPE) {
@@ -47,6 +57,11 @@ class MobilePage extends HomePage {
         await (await $('//div[@id="react-helpers"]/button')).click();
     }
    
+    async getRandomPageNumber() {
+        await this.scrollToPaginator();
+        const pagesQuantity = Number(await (await $(`//div[@id="j-paginator"]//a[last()-1]`)).getText());
+        return Math.floor(Math.random() * (pagesQuantity - 2)) + 2;
+    }
 }
 
 export const mobilePage = new MobilePage(); 

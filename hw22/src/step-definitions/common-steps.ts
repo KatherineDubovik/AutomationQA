@@ -7,6 +7,6 @@ Given(/^the User opens "(.+)" page$/, async (pageName: PAGES) => {
     await PageFactory.getPage(pageName).visitPage();
 });
 
-Then(/^tab title is (.+)$/, async (tabTitle: TAB_TITLES) => {
-    expect(await homePage.pageTitle).toBe(TAB_TITLES.HOME_TAB);
+Then(/^tab title is "(.+)"$/, async (tabTitle: TAB_TITLES) => {
+    expect(await homePage.pageTitle).toBe(tabTitle);
 })

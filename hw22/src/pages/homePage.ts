@@ -4,7 +4,7 @@ import { BasePage } from "./basePage";
 export class HomePage extends BasePage {
     constructor() {
         super();
-        this.url = `${baseUrl}`
+        this.url = baseUrl;
     }
 
     async getPromoCategoryByTitle(promoCategory: string) {
@@ -12,11 +12,11 @@ export class HomePage extends BasePage {
     }
 
     async getSearchField() {
-        return await $("#catalogSearch")
+        return await $("#catalogSearch");
     }
 
     async waitForHeaderIsDisplayed() {
-        return await (await $('//header[@id="header"]')).waitForDisplayed();
+        return await (await $('//header[@id="header"]')).isDisplayed();
     }
 }
 
