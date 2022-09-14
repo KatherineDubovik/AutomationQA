@@ -2,11 +2,6 @@ import { When, Then, Before } from '@wdio/cucumber-framework';
 import { mobilePage } from '../pages/mobilePage';
 import { PAGINATOR_ARROW_TYPE, SORT_PARAMETERS } from '../support/types';
 
-let expectedPageNum: number;
-Before("@pagination", async () => {
-    expectedPageNum = await mobilePage.getRandomPageNumber();
-})
-
 Then(/^popular is sort parameter selected by default$/, async () => {
     await mobilePage.getSelectedSortingParameter() === SORT_PARAMETERS.POPULAR;
 })
@@ -23,28 +18,29 @@ When(/^the User scrolls to the paginator$/, async () => {
     await mobilePage.scrollToPaginator();
 });
 
-When(/^the User clicks on specific page number$/, async () => {
-    await mobilePage.clickOnPaginationPageNumber(expectedPageNum);
+When(/^the User clicks on random page number$/, async function () {
+    this.expectedPageNum = await mobilePage.getRandomPageNumber();
+    await mobilePage.clickOnPaginationPageNumber(this.expectedPageNum);
 });
 
-Then(/^selected page number is active$/, async () => {
-    expect(await mobilePage.getActivePaginationPageNumber()).toBe(expectedPageNum);
+Then(/^selected page number is active$/, async function () {
+    expect(await mobilePage.getActivePaginationPageNumber()).toBe(this.expectedPageNum);
 });
 
 When(/^the User clicks on left arrow at paginator$/, async () => {
     await mobilePage.clickOnPaginatorArrow(PAGINATOR_ARROW_TYPE.LEFT);
 });
 
-Then(/^the User switched to previous pagination page$/, async () => {
-    expect(await mobilePage.getActivePaginationPageNumber()).toBe(expectedPageNum - 1);
+Then(/^the User switched to previous pagination page$/, async function () {
+    expect(await mobilePage.getActivePaginationPageNumber()).toBe(this.expectedPageNum - 1);
 });
 
 When(/^clicks on right arrow at paginator$/, async () => {
     await mobilePage.clickOnPaginatorArrow(PAGINATOR_ARROW_TYPE.RIGHT);
 });
 
-Then(/^the User switches to the next pagination page$/, async () => {
-    expect(await mobilePage.getActivePaginationPageNumber()).toBe(expectedPageNum + 1);
+Then(/^the User switches to the next pagination page$/, async function () {
+    expect(await mobilePage.getActivePaginationPageNumber()).toBe(this.expectedPageNum + 1);
 });
 
 When(/^the User clicks on Up button$/, async () => {
@@ -52,5 +48,5 @@ When(/^the User clicks on Up button$/, async () => {
 });
 
 Then(/^the User is moved to the top of the page$/, async () => {
-    expect(await mobilePage.waitForHeaderIsDisplayed()).toBe(true);
+    expect(await mobilePage.isHeaderDisplayed()).toBe(true);
 });

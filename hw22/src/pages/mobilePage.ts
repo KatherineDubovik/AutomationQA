@@ -5,10 +5,10 @@ import { HomePage } from "./homePage";
 class MobilePage extends HomePage {
     constructor() {
         super();
-        this.url = `${baseUrl}/mobile/`
+        this.url = `${baseUrl}/mobile/`;
     }
 
-    async getCategoryHeadertext() {
+    async getCategoryHeaderText() {
         return await (await $(`//h1[contains(@class,"content__header")]`)).getText();
     }
 
@@ -26,19 +26,17 @@ class MobilePage extends HomePage {
     }
 
     async clickOnPaginationPageNumber(expectedPageNumber: number) {
-        let pageNumberIsDisplayed = await this.checkIfPageNumberIsVisible(expectedPageNumber);
-        if (!pageNumberIsDisplayed) {
-            while (!pageNumberIsDisplayed) {
+        let isPageNumberDisplayed;
+            do {
                 await this.clickOnPaginatorArrow(PAGINATOR_ARROW_TYPE.RIGHT);
-                pageNumberIsDisplayed = await this.checkIfPageNumberIsVisible(expectedPageNumber);
-            }
-        }
+                isPageNumberDisplayed = await this.checkIfPageNumberIsVisible(expectedPageNumber);
+            } while (!isPageNumberDisplayed);
         await (await $(`//div[@id="j-paginator"]/a[@name="${expectedPageNumber}"]`)).click();
         await (await $(`//div[@id="j-paginator"]/span[@name="${expectedPageNumber}"]`)).waitForDisplayed(); 
     }
 
     async checkIfPageNumberIsVisible(pageNumber: number) {
-        return await (await $(`//div[@id="j-paginator"]/a[@name="${pageNumber}"]`)).isDisplayed()
+        return await (await $(`//div[@id="j-paginator"]/a[@name="${pageNumber}"]`)).isDisplayed();
     }
 
     async getActivePaginationPageNumber() {

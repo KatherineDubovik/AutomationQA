@@ -15,7 +15,7 @@ export class HomePage extends BasePage {
         return await $("#catalogSearch");
     }
 
-    async waitForHeaderIsDisplayed() {
+    async isHeaderDisplayed() {
         return await (await $('//header[@id="header"]')).isDisplayed();
     }
 }
