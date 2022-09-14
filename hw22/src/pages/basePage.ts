@@ -1,6 +1,6 @@
 export class BasePage {
     protected url!: string;
-    async visitPage() {
+    public async visitPage() {
         await browser.url(this.url);
     }
 

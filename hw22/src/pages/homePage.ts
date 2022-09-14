@@ -7,15 +7,15 @@ export class HomePage extends BasePage {
         this.url = baseUrl;
     }
 
-    async getPromoCategoryByTitle(promoCategory: string) {
+    public async getPromoCategoryByTitle(promoCategory: string) {
         return await $(`//div[@class="styles_promoList__1dG3i"]//a[text()="${promoCategory}"]`);
     }
 
-    async getSearchField() {
+    public async getSearchField() {
         return await $("#catalogSearch");
     }
 
-    async isHeaderDisplayed() {
+    public async isHeaderDisplayed() {
         return await (await $('//header[@id="header"]')).isDisplayed();
     }
 }

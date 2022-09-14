@@ -25,18 +25,18 @@ Feature: 21vek Mobile Page
         Then selected page number is active
     
     @previous-pagination-page
-    Scenario: Follow previous pagination page by clicking on left arrow at paginator
+    Scenario: Follow previous pagination page by clicking on prev arrow at paginator
         When the User scrolls to the paginator
         And the User clicks on random page number
-        And the User clicks on left arrow at paginator
-        Then the User switched to previous pagination page 
+        And the User clicks on prev arrow at paginator
+        Then the User is switched to the previous pagination page 
 
     @next-pagination-page
-    Scenario: Follow next pagination page by clicking on right arrow at paginator
+    Scenario: Follow next pagination page by clicking on next arrow at paginator
         When the User scrolls to the paginator
         And the User clicks on random page number
-        And clicks on right arrow at paginator
-        Then the User switches to the next pagination page 
+        And the User clicks on next arrow at paginator
+        Then the User is switched to the next pagination page 
 
     @navigation
     Scenario: Navigate to the top of the page by clicking on Up button
