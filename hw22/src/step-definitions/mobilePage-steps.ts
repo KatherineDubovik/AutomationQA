@@ -1,4 +1,4 @@
-import { When, Then, Before } from '@wdio/cucumber-framework';
+import { When, Then } from '@wdio/cucumber-framework';
 import { mobilePage } from '../pages/mobilePage';
 import { PAGINATOR_ARROW_TYPE, SORT_PARAMETERS } from '../support/types';
 
