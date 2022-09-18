@@ -1,10 +1,9 @@
 import { Page } from "@playwright/test";
 import { baseUrl } from "../support/constants";
-import { EXPOSITION_ITEMS } from "../support/types";
+import { EXPOSITION_ITEM_LINKS } from "../support/types";
 import { BasePage } from "./basePage";
 
 export class HomePage extends BasePage {
-    protected url: string;
     constructor(page: Page) {
         super(page);
         this.url = baseUrl;
@@ -14,8 +13,8 @@ export class HomePage extends BasePage {
         await this.page.goto(this.url);
     }
 
-    public async clickOnExpositionItem(expositionItem: EXPOSITION_ITEMS) {
-        await this.page.locator(`//div[@data-gtm_name="${expositionItem}"]//a`).click();
+    public async clickOnExpositionItemLink(expositionItemLink: EXPOSITION_ITEM_LINKS) {
+        await this.page.locator(`//a[@href="${expositionItemLink}"]`).click();
     }
 
     public async getCategoryHeaderText() {

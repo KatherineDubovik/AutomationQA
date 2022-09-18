@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { HomePage } from "../src/pages/homePage";
 import { PageFactory } from "../src/pages/pageFactory";
-import { EXPOSITION_ITEMS, PAGES } from "../src/support/types";
+import { baseUrl } from "../src/support/constants";
+import { EXPOSITION_ITEM_LINKS, PAGES } from "../src/support/types";
 
 let homePage: HomePage;
 
@@ -15,9 +16,11 @@ test.describe("Tests for 21vek.by site - Home Page", () => {
         await homePage.waitForPageTitleToBe("Онлайн-гипермаркет 21vek.by");
     });
 
-    test("Should follow the page of specific category by clicking on exposition item", async () => {
-        await homePage.clickOnExpositionItem(EXPOSITION_ITEMS.BOARD_GAMES);
-        await homePage.waitForPageTitleToBe("Настольные игры купить в Минске, Беларуси для всей семьи, со скидкой ");
-        expect(await homePage.getCategoryHeaderText()).toBe(EXPOSITION_ITEMS.BOARD_GAMES);
-    });
+    for(const item in EXPOSITION_ITEM_LINKS) {
+        const itemLink = EXPOSITION_ITEM_LINKS[item as keyof typeof EXPOSITION_ITEM_LINKS];
+        test(`Should follow the page with "${baseUrl + itemLink}" url by clicking on ${itemLink} exposition item`, async () => {
+            await homePage.clickOnExpositionItemLink(itemLink);
+            expect(await homePage.getPageUrl()).toContain(itemLink);
+        });
+    }
 })

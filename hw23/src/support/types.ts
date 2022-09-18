@@ -3,11 +3,11 @@ export enum PAGES {
     MOBILE = "Mobile"
 };
 
-export enum EXPOSITION_ITEMS {
-    HEATERS = "Обогреватели",
-    BOARD_GAMES = "Настольные игры",
-    DISTILLERS = "Дистилляторы", 
-    SEWING_MACHINES = "Швейные машинки"
+export enum EXPOSITION_ITEM_LINKS {
+    HEATERS = "/heaters/",
+    BOARD_GAMES = "/board_games/",
+    DISTILLERS = "/household_distillers/", 
+    SEWING_MACHINES = "/sewing_machines/"
 }
 
 export enum VIEW_TYPES {
