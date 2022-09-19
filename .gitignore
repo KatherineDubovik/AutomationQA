@@ -6,4 +6,4 @@ allure-results
 /test-results/
 /playwright-report/
 /playwright/.cache/
-assets/
+**/*assets
