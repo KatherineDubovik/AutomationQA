@@ -12,7 +12,7 @@ export class MobilePage extends HomePage {
     }
 
     public clickOnIconsViewElement(iconsViewType: VIEW_TYPES) {
-        cy.get("a.tools-view__link").contains(iconsViewType).click();
+        cy.getElementByInnerText("a.tools-view__link", iconsViewType).click();
     }
 
     public getSelectedSortingParameterElement() {
@@ -20,6 +20,6 @@ export class MobilePage extends HomePage {
     }
 
     public clickOnSortingParameterElement(parameter: SORT_PARAMETERS) {
-        cy.get("a.tools-sort__link").contains(parameter).click();
+        cy.getElementByInnerText("a.tools-sort__link", parameter).click();
     }
 }

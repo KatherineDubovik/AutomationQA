@@ -8,6 +8,6 @@ export class HomePage extends BasePage {
     }
 
     public clickOnExpositionItemLink(expositionItemLink: EXPOSITION_ITEM_LINKS) {
-        cy.get(`a.poster__link[href="${expositionItemLink}"]`).click();
+        cy.getLinkElementByPartialLinkText(expositionItemLink, ".poster__link").click();
     }
 }

@@ -25,7 +25,7 @@ describe("Tests for 21vek.by site - Mobile Page", () => {
     });
 
     it("Should sort items by sale parameter", () => {
-        cy.intercept("GET", `${mobilePage.url}?order*`).as("order");
+        cy.intercept("GET", "?order*").as("order");
         mobilePage.clickOnSortingParameterElement(SORT_PARAMETERS.SALE);
         mobilePage.getSelectedSortingParameterElement().should("include.text", SORT_PARAMETERS.SALE);
         cy.wait("@order").then((data) => {

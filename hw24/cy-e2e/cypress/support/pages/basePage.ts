@@ -1,5 +1,5 @@
 export class BasePage {
-    public url!: string;
+    protected url!: string;
 
     constructor() { }
 
