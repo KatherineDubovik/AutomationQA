@@ -12,7 +12,7 @@
     "hw21-pageObjects": "mocha --config hw21/mocharc.json",
     "hw22-wdio": "wdio run hw22/config/wdio.conf.ts",
     "hw23-playwright": "playwright test --config hw23/configs/playwright.config.ts",
-    "hw23-playright-report": "playwright show-report hw23/assets/reports",
+    "hw23-playwright-report": "playwright show-report hw23/assets/reports",
     "hw24-cy:open": "cypress open --config-file hw24/cy-e2e/cypress.config.ts",
     "hw24-cy:run": "cypress run --browser chrome --config-file hw24/cy-e2e/cypress.config.ts"
   },
