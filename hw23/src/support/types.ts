@@ -5,9 +5,9 @@ export enum PAGES {
 
 export enum EXPOSITION_ITEM_LINKS {
     HEATERS = "/heaters/",
-    BOARD_GAMES = "/board_games/",
-    DISTILLERS = "/household_distillers/", 
-    SEWING_MACHINES = "/sewing_machines/"
+    CULTIVATORS = "/cultivators/",
+    BEDCOVERS = "/throws_bedcovers/", 
+    MASSAGERS = "/massagers/"
 }
 
 export enum VIEW_TYPES {
