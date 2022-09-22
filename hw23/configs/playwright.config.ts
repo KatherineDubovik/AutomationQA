@@ -30,7 +30,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { open: 'never', outputFolder: '../assets/reports', outputFile: 'html-report' }]],
+  reporter: [['html', { open: 'never', outputFolder: '../assets/reports', outputFile: 'html-report' }], ['allure-playwright', { detail: true, outputFolder: 'hw23/assets/allure-results' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -98,7 +98,7 @@ const config: PlaywrightTestConfig = {
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  // outputDir: 'test-results/',
+  outputDir: '../assets/test-results/',
 
   /* Run your local dev server before starting the tests */
   // webServer: {

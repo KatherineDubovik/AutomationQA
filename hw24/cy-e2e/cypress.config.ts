@@ -1,5 +1,6 @@
 import { defineConfig } from "cypress";
 import { baseUrl, cypressFolder, defaultWaitingTime } from "./cypress/support/constants/constants";
+import AllureWriter from "@shelex/cypress-allure-plugin/writer";
 
 export default defineConfig({
   e2e: {
@@ -11,5 +12,13 @@ export default defineConfig({
     downloadsFolder: `${cypressFolder}/assets/dowloads`,
     screenshotsFolder: `${cypressFolder}/assets/screenshots`,
     fixturesFolder: `${cypressFolder}/fixtures`,
+    setupNodeEvents(on, config) {
+      AllureWriter(on, config);
+      return config;
+    },
+    env: {
+      allure: true,
+      allureResultsPath: "hw24/cy-e2e/cypress/assets/allure-results"
+    }
   },
 });

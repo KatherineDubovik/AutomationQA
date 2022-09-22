@@ -1,4 +1,5 @@
 import type { Options } from '@wdio/types'
+import { rmSync } from 'fs';
 
 export const config: Options.Testrunner = {
     //
@@ -164,7 +165,7 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec',['allure', {outputDir: 'hw22/assets/allure-results'}]],
 
 
     //
@@ -207,8 +208,10 @@ export const config: Options.Testrunner = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function () {
+        rmSync("hw22/assets/allure-report", { recursive: true, force: true });
+        rmSync("hw22/assets/allure-results", { recursive: true, force: true });
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -292,8 +295,11 @@ export const config: Options.Testrunner = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {Object}             context          Cucumber World object
      */
-    // afterStep: function (step, scenario, result, context) {
-    // },
+    afterStep: async function (step, scenario, result) {
+        if(result.error) {
+            await browser.takeScreenshot();
+        }
+    },
     /**
      *
      * Runs after a Cucumber Scenario.

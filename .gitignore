@@ -3,7 +3,8 @@ node_modules/
 *.exe
 .vscode
 allure-results
-/test-results/
+allure-report
 /playwright-report/
 /playwright/.cache/
 **/*assets
+**/*logs
